@@ -1,0 +1,828 @@
+/* ============================================= */
+/* 1. ROOT VARIABLES & GLOBAL STYLES
+/* ============================================= */
+:root {
+    /* Color Palette */
+    --gold-solid: #D4AF37;
+    --gold-gradient: linear-gradient(to right, #B38728, #FBF5B7, #B38728);
+    --text-main: #FFFFFF;
+    --text-muted: #a0a0a0;
+    --f1-red: #FF1801;
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --tech-blue: #82aaff; /* NOVA COR AZUL */
+
+    /* Fonts */
+    --font-display: 'Rajdhani', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-serif: 'Playfair Display', serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000000;
+    color: var(--text-main);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.532)),
+        url('images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* ============================================= */
+/* 2. HEADER & NAVIGATION
+/* ============================================= */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 60px;
+    z-index: 100;
+    transition: background-color 0.4s ease, backdrop-filter 0.4s ease, border-bottom 0.4s ease;
+    border-bottom: 1px solid transparent;
+}
+header.scrolled {
+    background-color: rgba(10, 10, 10, 0.5);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--glass-border);
+}
+nav { display: flex; justify-content: space-between; align-items: center; max-width: 1600px; margin: 0 auto; }
+.logo { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; letter-spacing: 1px; }
+.gold-text { color: var(--gold-solid); font-weight: 700; }
+/* ============================================= */
+/* Substitua esta seção no seu style.css        */
+/* ============================================= */
+
+.menu a {
+    text-decoration: none;
+    color: var(--text-muted);
+    margin-left: 35px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    padding-bottom: 8px; /* Mantém o espaço para a linha */
+    position: relative; /* Essencial para posicionar a linha animada */
+    transition: color 0.3s ease;
+}
+
+.menu a:hover,
+.menu a.active {
+    color: var(--text-main); /* No hover ou se estiver ativo, a cor do texto muda */
+}
+
+/* A NOVA LINHA ANIMADA */
+.menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--gold-solid);
+
+    /* A mágica da animação */
+    transform: scaleX(0); /* Começa invisível (escala 0 no eixo X) */
+    transform-origin: center; /* A animação acontece a partir do centro */
+    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1); /* Transição suave */
+}
+
+/* Anima a linha para aparecer no hover */
+.menu a:hover::after {
+    transform: scaleX(1); /* Expande a linha para 100% da largura */
+}
+
+/* Mantém a linha visível no link ativo */
+.menu a.active::after {
+    transform: scaleX(1); /* Garante que o link ativo já comece com a linha visível */
+}
+
+/* ============================================= */
+/* 3. REUSABLE COMPONENTS
+/* ============================================= */
+.page-container { padding: 120px 5% 50px 5%; max-width: 1200px; margin: 0 auto; }
+.tab-link { background: transparent; border: none; color: var(--text-muted); font-family: var(--font-display); font-size: 1.1rem; text-transform: uppercase; padding: 15px 25px; cursor: pointer; position: relative; transition: color 0.3s; }
+.tab-link:hover { color: var(--text-main); }
+.tab-link.active { color: var(--gold-solid); }
+.tab-link.active::after { content: ''; position: absolute; bottom: -1px; left: 0; width: 100%; height: 3px; background: var(--gold-solid); }
+.tab-link i { margin-right: 8px; }
+.tab-content { display: none; animation: fadeIn 0.5s; }
+.tab-content.active { display: block; }
+
+/* ============================================= */
+/* 4. PAGE: HOMEPAGE (index.html)
+/* ============================================= */
+.hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
+.hero-content { animation: fadeIn 1.5s ease-out; }
+.overline { color: var(--gold-solid); font-family: var(--font-display); text-transform: uppercase; letter-spacing: 3px; margin-bottom: 25px; font-size: 0.9rem; font-weight: 600; }
+h1 { font-family: var(--font-display); font-size: 7rem; line-height: 1.0; font-weight: 700; text-transform: uppercase; margin-bottom: 25px; }
+.outline-text { -webkit-text-stroke: 1px rgba(255, 255, 255, 0.4); color: transparent; }
+.subtitle { color: var(--text-muted); font-size: 1.1rem; max-width: 500px; margin: 0 auto 40px auto; }
+/* ============================================= */
+/* Substitua esta seção no seu style.css        */
+/* ============================================= */
+
+.cta-group { 
+    display: flex; 
+    gap: 15px; 
+    justify-content: center; 
+}
+
+/* --- ESTILO BASE PARA AMBOS OS BOTÕES --- */
+.btn-gold, .btn-outline {
+    padding: 14px 40px; /* Aumentei um pouco o padding lateral */
+    text-decoration: none; 
+    font-family: var(--font-display); 
+    font-weight: 700; 
+    font-size: 0.9rem; 
+    text-transform: uppercase; 
+    letter-spacing: 1.5px; 
+    transition: all 0.4s ease; /* Transição mais suave */
+    position: relative; /* Essencial para as animações */
+    overflow: hidden;   /* Esconde os elementos da animação que estão fora */
+    z-index: 1;
+    border: 1px solid transparent; /* Borda base para alinhamento */
+    clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+}
+
+/* --- BOTÃO DOURADO PRINCIPAL --- */
+.btn-gold { 
+    background: var(--gold-gradient); 
+    background-size: 250%; /* Aumenta o tamanho do gradiente para animar */
+    background-position: left;
+    color: #000; 
+    border-color: #B38728;
+}
+.btn-gold:hover { 
+    transform: translateY(-3px) scale(1.03); /* Efeito de "levantar" */
+    background-position: right; 
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+}
+
+/* --- BOTÃO SECUNDÁRIO (COM EFEITO DE PREENCHIMENTO) --- */
+.btn-outline { 
+    border: 1px solid rgba(255,255,255,0.4); 
+    color: var(--text-main);
+    background: transparent;
+}
+
+/* A MÁGICA ACONTECE AQUI: Camada de preenchimento */
+.btn-outline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gold-gradient);
+    z-index: -1;
+    transition: transform 0.4s cubic-bezier(0.7, 0, 0.2, 1); /* Curva de aceleração elegante */
+    transform-origin: left;
+    transform: scaleX(0); /* Começa "escondido" */
+}
+
+.btn-outline:hover {
+    color: #000; /* Texto fica preto para contrastar com o fundo dourado */
+    border-color: var(--gold-solid); /* Borda fica dourada */
+}
+
+.btn-outline:hover::before {
+    transform: scaleX(1); /* Expande a camada para preencher o botão */
+}
+
+/* ============================================= */
+/* 5. PAGE: HUB (hub.html)
+/* ============================================= */
+.hub-tabs, .rules-subnav { display: flex; justify-content: center; gap: 10px; margin-bottom: 40px; border-bottom: 1px solid var(--glass-border); }
+.next-race-container { background: rgba(18, 18, 18, 0.7); border: 1px solid var(--glass-border); border-radius: 12px; padding: 30px 40px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; position: relative; overflow: hidden; }
+.next-race-container::before { content: ''; position: absolute; top: -25%; right: -5%; width: 50%; height: 150%; background-image: var(--next-race-flag-url); background-size: contain; background-repeat: no-repeat; background-position: center right; opacity: 0.08; z-index: 1; transition: background-image 0.5s ease-in-out; }
+.next-race-info, .countdown-timer { position: relative; z-index: 2; }
+.next-race-info h3 { font-size: 0.9rem; font-weight: 700; color: var(--gold-solid); text-transform: uppercase; letter-spacing: 2px; }
+.next-race-info h1 { font-family: var(--font-display); font-size: 4rem; text-transform: uppercase; line-height: 1; margin: 5px 0 10px 0; }
+.next-race-info p { color: var(--text-muted); font-size: 1.1rem; }
+.countdown-timer { display: flex; gap: 25px; font-family: var(--font-display); font-weight: 700; font-size: 4rem; line-height: 1; }
+.countdown-timer small { display: block; font-family: var(--font-body); font-size: 0.8rem; font-weight: 400; color: var(--text-muted); text-align: center; text-transform: uppercase; margin-top: 10px; }
+.calendar-wrapper { position: relative; }
+.calendar-scroll-container { display: grid; grid-auto-flow: column; grid-template-rows: repeat(2, auto); gap: 15px; padding: 10px 5px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none; }
+.calendar-scroll-container::-webkit-scrollbar { display: none; }
+.race-item { display: flex; align-items: center; gap: 15px; background: rgba(18, 18, 18, 0.7); border: 1px solid var(--glass-border); border-radius: 8px; padding: 15px; width: 380px; scroll-snap-align: start; transition: border-color 0.3s, background-color 0.3s; }
+.race-item:hover { border-color: var(--gold-solid); background-color: #1a1a1a; }
+.race-item-flag { width: 50px; height: auto; border-radius: 4px; }
+.race-item-date { font-family: var(--font-display); text-align: center; color: var(--text-muted); }
+.race-item-date .month { font-size: 0.8rem; }
+.race-item-date .days { font-size: 1.5rem; color: var(--text-main); line-height: 1; }
+.race-item-details { flex-grow: 1; }
+.race-item-details .round-track { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; }
+.race-item-details .country { font-family: var(--font-display); font-size: 1.8rem; color: var(--text-main); text-transform: uppercase; line-height: 1.1; }
+.race-item-sprint { background-color: var(--f1-red); color: #fff; font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 5px; text-transform: uppercase; }
+.scroll-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(20, 20, 20, 0.6); border: 1px solid var(--glass-border); color: var(--gold-solid); width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; backdrop-filter: blur(5px); transition: all 0.3s; }
+.scroll-arrow:hover { background-color: rgba(212, 175, 55, 0.2); border-color: var(--gold-solid); }
+#scroll-left { left: -20px; }
+#scroll-right { right: -20px; }
+.news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; }
+.news-card { text-decoration: none; color: inherit; border-radius: 12px; overflow: hidden; position: relative; background-size: cover; background-position: center; transition: transform 0.3s ease, box-shadow 0.3s ease; min-height: 250px; display: flex; flex-direction: column; justify-content: flex-end; }
+.news-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+.news-card-content { background: linear-gradient(to top, rgba(10, 10, 10, 0.95), transparent); padding: 25px; }
+.news-card h2 { font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 5px; color: #f5f5f5; line-height: 1.2; }
+.news-card .news-card-subtitle { color: var(--text-muted); font-size: 1rem; line-height: 1.5; margin-bottom: 15px; }
+.news-card-meta { padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.15); color: #888; font-size: 0.8rem; display: flex; flex-direction: column; gap: 5px; }
+
+/* ============================================= */
+/* 6. PAGE: REGULATIONS & POSTS
+/* ============================================= */
+.post-container { padding: 0; background: transparent; border: none; }
+.post-hero-header { padding: 60px 40px; border-radius: 12px; background-size: cover; background-position: center; position: relative; overflow: hidden; margin-bottom: 40px; }
+.post-hero-header::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(10, 10, 10, 0.7); backdrop-filter: blur(5px); }
+.post-header-content { position: relative; z-index: 2; }
+.post-hero-header h1 { font-family: var(--font-serif); font-size: 3.2rem; color: #fff; margin: 0; }
+.post-hero-header .post-subtitle { font-size: 1.3rem; color: var(--text-muted); margin-top: 10px; max-width: 80%; }
+.post-meta { margin: 25px 0 0 0; padding-top: 20px; border-top: 1px solid var(--glass-border); display: flex; flex-wrap: wrap; gap: 25px; color: #aaa; font-size: 0.9rem; }
+.post-meta i { margin-right: 8px; color: var(--gold-solid); }
+
+/* --- NOVOS ESTILOS PARA O CONTEÚDO DO POST --- */
+.post-content { background: rgba(10, 15, 20, 0.7); border: 1px solid var(--glass-border); border-radius: 12px; padding: 40px; }
+.post-content p { color: #ccc; font-size: 1.1rem; line-height: 1.9; margin-bottom: 1.5em; }
+.post-content h3 {
+    font-family: var(--font-display);
+    color: #D4AF37;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-top: 2.5em; /* Espaço entre seções */
+    margin-bottom: 1em;
+}
+.post-content h3:first-of-type {
+    margin-top: 0; /* Remove o espaço extra do primeiro título */
+}
+.highlight-blue {
+    color: #D4AF37;
+    font-weight: 500;
+}
+.back-to-hub-link { display: inline-block; margin-top: 30px; color: var(--gold-solid); text-decoration: none; font-weight: bold; border: 1px solid var(--gold-solid); padding: 10px 20px; border-radius: 5px; transition: background-color 0.3s, color 0.3s; }
+.back-to-hub-link:hover { background-color: var(--gold-solid); color: #000; }
+.back-to-hub-link i { margin-right: 5px; }
+
+/* --- Estilos antigos da página de regras mantidos --- */
+.rules-container { background: rgba(10, 15, 20, 0.7); border: 1px solid var(--glass-border); border-radius: 12px; padding: 40px; backdrop-filter: blur(8px); max-width: 900px; margin: 0 auto; }
+.rules-header { text-align: center; border-bottom: 1px solid var(--glass-border); padding-bottom: 25px; margin-bottom: 30px; }
+.rules-header h1 { font-family: var(--font-display); font-size: 3.5rem; line-height: 1.1; text-transform: uppercase; }
+.rules-subtitle { font-size: 1.2rem; color: var(--text-muted); }
+.preamble { background: rgba(0,0,0,0.2); border-left: 4px solid var(--gold-solid); padding: 20px 25px; margin: 40px 0; border-radius: 0 8px 8px 0; }
+.preamble h2 { font-family: var(--font-display); font-size: 1.5rem; margin-bottom: 10px; }
+.preamble p { font-style: italic; color: #ccc; line-height: 1.7; }
+.rules-division { margin-top: 50px; }
+.division-title { display: flex; align-items: center; gap: 20px; border-bottom: 1px solid var(--glass-border); padding-bottom: 15px; margin-bottom: 30px; }
+.division-numeral { font-family: var(--font-display); font-size: 4rem; color: var(--gold-solid); opacity: 0.4; line-height: 1; }
+.division-title h2 { font-family: var(--font-display); font-size: 2.2rem; text-transform: uppercase; }
+.rules-article { margin-bottom: 35px; }
+.rules-article h3 { font-family: var(--font-display); font-size: 1.6rem; color: #f0f0f0; margin-bottom: 15px; }
+.article-content p, .article-content li { color: #ccc; line-height: 1.8; margin-bottom: 1em; }
+.article-content ul { list-style-position: inside; padding-left: 10px; }
+.penalty-list { list-style: none; padding: 0; }
+.penalty-list li { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid var(--glass-border); }
+.penalty-list li:nth-child(odd) { background: rgba(0,0,0,0.1); }
+
+/* ============================================= */
+/* 7. FOOTER DINÂMICO
+/* ============================================= */
+.footer-info { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 15px; font-family: var(--font-display); color: #888; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+.footer-info .separator { color: #444; }
+.status-container { display: flex; align-items: center; gap: 8px; }
+.status-dot { width: 9px; height: 9px; border-radius: 50%; transition: background-color 0.5s, box-shadow 0.5s; }
+.status-dot.online { background-color: #00ff88; box-shadow: 0 0 10px #00ff88; }
+.status-dot.unstable { background-color: #ffaa00; box-shadow: 0 0 10px #ffaa00; }
+.status-dot.offline { background-color: #FF1801; box-shadow: 0 0 10px #FF1801; }
+
+/* ============================================= */
+/* 9. PAGE: TETO SALARIAL (NOVO)
+/* ============================================= */
+.budget-tracker {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10, 10, 10, 0.6);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 20px 30px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.budget-item {
+    text-align: center;
+    flex-grow: 1;
+}
+.budget-item span {
+    display: block;
+    font-family: var(--font-display);
+}
+.budget-item span:first-child {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+.budget-item span:last-child {
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+.budget-item.remaining span:last-child {
+    color: var(--gold-solid);
+}
+
+.driver-market-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 25px;
+}
+
+.team-drivers-card {
+    background: rgba(18, 18, 18, 0.7);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    overflow: hidden;
+    border-left: 4px solid var(--team-color, var(--gold-solid));
+}
+
+.team-header {
+    padding: 15px 20px;
+    background: rgba(0,0,0,0.2);
+    border-bottom: 1px solid var(--glass-border);
+}
+.team-header h2 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.drivers-list {
+    padding: 10px;
+}
+
+.driver-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+.driver-item:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.driver-photo-placeholder {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+/* Para quando você adicionar as imagens: */
+/*
+.driver-photo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+*/
+
+.driver-info {
+    flex-grow: 1;
+}
+.driver-info .driver-name {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+.driver-info .driver-number {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    color: var(--team-color, var(--gold-solid));
+    font-weight: 700;
+}
+.driver-price {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-main);
+    min-width: 100px;
+    text-align: right;
+}
+
+@media (max-width: 768px) {
+    .driver-market-grid {
+        grid-template-columns: 1fr; /* Coluna única em telas menores */
+    }
+    .budget-tracker {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+/* ============================================= */
+/* 11. REGULAMENTOS - RESUMO DO FANTASY (NOVO)
+/* ============================================= */
+.fantasy-preview-block {
+    background: rgba(0,0,0,0.25);
+    border-left: 3px solid var(--gold-solid);
+    border-radius: 0 8px 8px 0;
+    padding: 20px 25px;
+    margin: 30px 0; /* Espaçamento para separar dos parágrafos */
+}
+
+.fantasy-preview-block h4 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--text-main);
+    margin: 0 0 15px 0;
+}
+
+.fantasy-preview-block h4 i {
+    color: var(--gold-solid);
+    margin-right: 10px;
+}
+
+.fantasy-driver-list {
+    margin-bottom: 20px;
+}
+
+.fantasy-driver-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--glass-border);
+    font-size: 0.95rem;
+}
+
+.fantasy-driver-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.fantasy-driver-item:first-child {
+    padding-top: 0;
+}
+
+.fantasy-driver-item span:first-child {
+    color: #ccc;
+}
+.fantasy-driver-item span:last-child {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #fff;
+}
+
+.highlighted-link {
+    color: var(--gold-solid);
+    text-decoration: none;
+    font-weight: 700;
+    transition: letter-spacing 0.3s;
+    font-size: 1rem;
+}
+
+.highlighted-link:hover {
+    text-decoration: underline;
+    letter-spacing: 0.5px;
+}
+
+.highlighted-link i {
+    margin-left: 5px;
+    transition: transform 0.3s;
+}
+
+.highlighted-link:hover i {
+    transform: translateX(4px);
+}
+
+/* ============================================= */
+/* 8. ANIMAÇÕES & RESPONSIVIDADE
+/* ============================================= */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (max-width: 768px) {
+    header { padding: 20px; }
+    h1, .post-hero-header h1 { font-size: 3rem; }
+    .footer-info { width: 100%; justify-content: center; bottom: 20px; }
+    .hub-tabs, .rules-subnav { gap: 0; justify-content: space-around; }
+    .tab-link { padding: 15px 5px; font-size: 0.9rem; }
+    .scroll-arrow { display: none; }
+    .race-item { width: 320px; }
+    .rules-header h1 { font-size: 2.5rem; }
+    .division-numeral { font-size: 3rem; }
+    .division-title h2 { font-size: 1.8rem; }
+    .rules-container, .post-content, .post-hero-header { padding: 20px; }
+}
+
+@media (max-width: 600px) {
+    .next-race-container { flex-direction: column; align-items: stretch; }
+    .countdown-timer { justify-content: space-between; margin-top: 20px; }
+}
+
+/* ============================================= */
+/* 9. PAGE: TETO SALARIAL (NOVO E MELHORADO)
+/* ============================================= */
+.page-market {
+    display: flex;
+    gap: 25px;
+}
+.market-content {
+    flex-grow: 1;
+}
+
+.budget-tracker {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10, 10, 10, 0.6);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 20px 30px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.budget-item {
+    text-align: center;
+    flex-grow: 1;
+}
+.budget-item span {
+    display: block;
+    font-family: var(--font-display);
+}
+.budget-item span:first-child {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+.budget-item span:last-child {
+    font-size: 2.2rem;
+    font-weight: 700;
+    transition: color 0.3s;
+}
+.budget-item.remaining span:last-child {
+    color: var(--gold-solid);
+}
+
+.driver-market-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 25px;
+}
+
+.team-drivers-card {
+    background: rgba(18, 18, 18, 0.7);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    overflow: hidden;
+    border-left: 4px solid var(--team-color, var(--gold-solid));
+    transition: border-color 0.3s;
+}
+.team-drivers-card:hover {
+    border-color: var(--glass-border);
+}
+
+.team-header {
+    padding: 15px 20px;
+    background: rgba(0,0,0,0.2);
+    border-bottom: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.team-logo {
+    height: 30px;
+    width: auto;
+}
+.team-header h2 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.drivers-list {
+    padding: 10px;
+}
+
+.driver-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 6px;
+    transition: background-color 0.3s, opacity 0.3s, border 0.3s;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+.driver-item:not(.disabled):hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+/* Estilo para piloto selecionado */
+.driver-item.selected {
+    background-color: rgba(212, 175, 55, 0.15);
+    border-color: var(--gold-solid);
+}
+/* Estilo para piloto que não pode ser selecionado */
+.driver-item.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.driver-photo-placeholder {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.driver-info {
+    flex-grow: 1;
+}
+.driver-info .driver-name {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+.driver-info .driver-number {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    color: var(--team-color, var(--gold-solid));
+    font-weight: 700;
+}
+.driver-price {
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-main);
+    min-width: 100px;
+    text-align: right;
+}
+
+/* ============================================= */
+/* 10. PAINEL LATERAL "SUA EQUIPE"
+/* ============================================= */
+.my-team-container {
+    width: 350px;
+    flex-shrink: 0;
+    background: rgba(10, 10, 10, 0.7);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 25px;
+    position: sticky;
+    top: 120px; /* Alinhado com o padding do container */
+    height: fit-content;
+    backdrop-filter: blur(8px);
+    transition: border-color 0.4s;
+}
+.my-team-container.complete {
+    border-color: var(--gold-solid);
+}
+
+.my-team-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+.my-team-header h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    margin: 0;
+}
+.my-team-header span {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    transition: color 0.4s;
+}
+
+#my-team-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.my-team-driver {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 6px;
+}
+.my-team-driver.placeholder {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    justify-content: center;
+    background: transparent;
+    border: 1px dashed var(--glass-border);
+}
+
+.my-team-driver-info {
+    display: flex;
+    flex-direction: column;
+}
+.my-team-driver-name {
+    font-weight: 700;
+}
+.my-team-driver-team {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+.my-team-driver-price {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.my-team-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--glass-border);
+    padding-top: 15px;
+}
+.team-count {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+.team-count span:last-child {
+    font-family: var(--font-display);
+    color: var(--text-main);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.btn-clear {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: var(--text-muted);
+    font-family: var(--font-display);
+    font-weight: 700;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.btn-clear:hover {
+    background-color: var(--f1-red);
+    border-color: var(--f1-red);
+    color: #fff;
+}
+.btn-clear i { margin-right: 8px; }
+
+@media (max-width: 1200px) {
+    .page-market {
+        flex-direction: column;
+    }
+    .my-team-container {
+        width: 100%;
+        position: relative;
+        top: 0;
+    }
+}
+@media (max-width: 768px) {
+    .driver-market-grid {
+        grid-template-columns: 1fr; /* Coluna única em telas menores */
+    }
+    .budget-tracker {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

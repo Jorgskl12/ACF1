@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HUB - AI Virtual GP</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">AI VIRTUAL <span class="gold-text">GP</span></div>
+            <div class="menu">
+                <a href="index.html">Início</a>
+                <a href="hub.html" class="active">HUB</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="page-container">
+        
+        <div class="hub-tabs">
+            <button class="tab-link" data-tab="calendar"><i class="fa-solid fa-calendar-days"></i> Calendário 2026</button>
+            <button class="tab-link active" data-tab="news"><i class="fa-solid fa-newspaper"></i> Notícias</button>
+        </div>
+
+        <div class="hub-content">
+
+            <div id="calendar" class="tab-content">
+                <div class="next-race-container">
+                    <div class="next-race-info">
+                        <h3>PRÓXIMO EVENTO</h3>
+                        <h1 id="next-race-name">Carregando...</h1>
+                        <p id="next-race-track">Aguarde</p>
+                    </div>
+                    <div class="countdown-timer" id="countdown"></div>
+                </div>
+                
+                <div class="calendar-wrapper">
+                    <button id="scroll-left" class="scroll-arrow"><i class="fa-solid fa-chevron-left"></i></button>
+                    <div class="calendar-scroll-container"></div>
+                    <button id="scroll-right" class="scroll-arrow"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+
+            <div id="news" class="tab-content active">
+                <div class="page-header" style="text-align: center; margin-bottom: 40px;">
+                    <h1 style="font-size: 3.5rem; text-transform: uppercase; font-family: var(--font-display);">Notícias e Editoriais</h1>
+                </div>
+                <div class="news-grid">
+                     
+                     <!-- CARD DE NOTÍCIA ATUALIZADO -->
+                     <a href="posts/a-origem-do-projeto.html" class="news-card" 
+                        style="background-image: url('https://i.imgur.com/g0m4s4q.jpeg');">
+                        <div class="news-card-content">
+                            <h2>A Origem da AI Virtual GP</h2>
+                            <p class="news-card-subtitle">Uma carta do fundador sobre paixão, F1 e a busca por um novo tipo de entretenimento.</p>
+                            <div class="news-card-meta">
+                                <span>Categoria: Editorial</span>
+                                <span>Publicado em: 11/09/2025</span>
+                            </div>
+                        </div>
+                    </a>
+                    <!-- Adicione novos cards aqui -->
+
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script src="script.js"></script>
+</body>
+</html>
